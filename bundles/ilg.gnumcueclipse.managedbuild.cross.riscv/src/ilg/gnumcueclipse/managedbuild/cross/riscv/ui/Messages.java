@@ -66,6 +66,7 @@ public class Messages extends NLS {
 
 	public static String ProjectToolchainsPathsPropertiesPage_description;
 	public static String WorkspaceToolchainsPathsPreferencesPage_description;
+	public static String WorkspaceToolchainsCombinationsPreferencesPage_description;
 	public static String GlobalToolchainsPathsPreferencesPage_description;
 
 	// ------------------------------------------------------------------------

@@ -11,6 +11,7 @@
 
 package ilg.gnumcueclipse.managedbuild.cross.riscv;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.osgi.framework.BundleContext;
 
 import ilg.gnumcueclipse.core.AbstractUIActivator;
@@ -54,6 +55,8 @@ public class Activator extends AbstractUIActivator {
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		//IDialogSettings[] temp = this.getDialogSettings().getSections();
+		//System.out.println("hello"); this.getWorkbench().getActiveWorkbenchWindow()
 	}
 
 	public void stop(BundleContext context) throws Exception {

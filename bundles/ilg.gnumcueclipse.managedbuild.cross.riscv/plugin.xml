@@ -202,6 +202,7 @@
 			</option>
 		</tool>
 		<tool
+			
 			id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.compiler"
 			isAbstract="true"
 			name="Compiler common options">
@@ -211,10 +212,47 @@
 			isAbstract="false"
 			name="Linker common options">
 		</tool>
+		<!-- ******************************************************************************* -->
 		<tool
 			id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.base"
 			isAbstract="true"
 			name="RISC-V Targets common options">
+			<option
+				command="-validate"
+				commandFalse="-do-not-validate"
+				defaultValue="No message"
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate"
+				isAbstract="false"
+				name=""
+				tip="Architecture-ABI Validation message"
+				valueType="string"
+				applicabilityCalculator="ilg.gnumcueclipse.managedbuild.cross.riscv.validation.ValidationMsg">
+			</option>					
+			<!-- ******************************************************************************* -->
+			<option
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validateselector"
+				isAbstract="true"
+				name="%option.target.validate"
+				tip="Use to validate combination (Architecture-ABI)"
+				valueType="enumerated"
+				
+				applicabilityCalculator="ilg.gnumcueclipse.managedbuild.cross.riscv.validation.ValidationImplementor">
+				<enumeratedOptionValue
+					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateoff"
+					isDefault="true"
+					name="%option.target.validate.off">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcmodel=medany"
+					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateon"
+					name="%option.target.validate.on">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcmodel=medlow"
+					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validatewarning"
+					name="%option.target.validate.warning">
+				</enumeratedOptionValue>			
+			</option>
 			<option
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.isa.base"
 				isAbstract="true"
@@ -229,7 +267,7 @@
 				<enumeratedOptionValue
 					command="-march=rv32i"
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.arch.rv32i"
-					name="%option.target.isa.base.rv32i">
+					name="%option.target.isa.base.rv32i">				
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-march=rv64i"
@@ -315,6 +353,7 @@
 				isAbstract="true"
 				name="%option.target.isa.fp"
 				valueType="enumerated">
+				
 				<enumeratedOptionValue
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.isa.fp.none"
 					isDefault="true"
@@ -381,7 +420,9 @@
 				isAbstract="true"
 				name="%option.target.abi.integer"
 				tip="Specify integer and floating-point calling convention. This defaults to the natural calling convention: e.g. LP64 for RV64I, ILP32 for RV32I, LP64D for RV64G."
-				valueType="enumerated">
+				valueType="enumerated"
+				
+				>
 				<enumeratedOptionValue
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.abi.integer.default"
 					isDefault="true"
@@ -401,7 +442,20 @@
 					command="-mabi=lp64"
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.abi.integer.lp64"
 					name="%option.target.abi.integer.lp64">
+					<!--<enablement type="UI_ENABLEMENT">
+						<not>
+							<or>
+								<checkOption
+									isRegex="false"
+									optionId="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.isa.base"
+									value="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.arch.default">
+								</checkOption>
+							</or>
+						</not>
+					</enablement>-->
+				-------------------------
 				</enumeratedOptionValue>
+				
 			</option>
 			<option
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.abi.fp"
@@ -477,7 +531,7 @@
 				tip="Use smaller but slower prologue and epilogue code (-msave-restore)."
 				valueType="boolean">
 			</option>
-			<option
+		    <option
 				command="-mmemcpy"
 				defaultValue="false"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.memcpy"
@@ -525,7 +579,9 @@
 					</false>
 				</enablement>
 			</option>
+			
 			<option
+			
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.tune"
 				isAbstract="true"
 				name="%option.target.tune"
@@ -727,7 +783,7 @@
 				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.smalldatalimit"
 				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.smalldatalimit">
-			</option>
+			</option>		
 			<option
 				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.align"
@@ -764,7 +820,16 @@
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.other"
 				superClass="ilg.gnumcueclipse.managedbuild.cross.option.base.target.other">
 			</option>
-
+			<option
+				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validate"
+				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate">
+			</option>
+			<option   
+				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateselector"
+				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validateselector">
+			</option>
 			<!-- ===== Debugging ========================================== -->
 			<optionCategory
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.optimization"
@@ -2441,7 +2506,7 @@
 			</language-scope>
 		</provider>
 	</extension>
-	<extension point="org.eclipse.cdt.ui.cPropertyTab">
+<!--	<extension point="org.eclipse.cdt.ui.cPropertyTab">
 		<tab
 			class="ilg.gnumcueclipse.managedbuild.cross.riscv.ui.TabToolchains"
 			helpId="cdt_u_prop_build_setting_tool"
@@ -2451,7 +2516,7 @@
 			tooltip="Select and configure the toolchain  "
 			weight="012">
 		</tab>
-	</extension>
+	</extension> -->
 	<extension point="ilg.gnumcueclipse.debug.core.cprojectExtra">
 		<factory
 			class="ilg.gnumcueclipse.managedbuild.cross.xpi.CProjectExtraDataManagerFactory">
@@ -2471,6 +2536,18 @@
 			name="%preferences.globalToolchainsPaths">
 		</page>
 	</extension>
+	
+<!-- ************************************************************************************************************ -->
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="ilg.gnumcueclipse.core.ui.preferences.mcu"
+			class="ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences.WorkspaceToolchainsCombinatiosPreferencesPage"
+			id="ilg.gnumcueclipse.managedbuild.cross.riscv.preferencePage.workspaceToolchainsCombinations"
+			name="%preferences.workspaceToolchainsCombinations">
+		</page>	
+	</extension>
+<!-- ************************************************************************************************************ -->
+	
 	<extension point="org.eclipse.ui.propertyPages">
 		<page
 			category="ilg.gnumcueclipse.core.ui.properties.mcu"
