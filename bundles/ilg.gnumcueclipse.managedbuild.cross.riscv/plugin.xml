@@ -218,8 +218,8 @@
 			isAbstract="true"
 			name="RISC-V Targets common options">
 			<option
-				command="-validate"
-				commandFalse="-do-not-validate"
+				
+				
 				defaultValue="No message"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate"
 				isAbstract="false"
@@ -243,16 +243,17 @@
 					name="%option.target.validate.off">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
-					command="-mcmodel=medany"
+					
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateon"
 					name="%option.target.validate.on">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
-					command="-mcmodel=medlow"
+					
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validatewarning"
 					name="%option.target.validate.warning">
 				</enumeratedOptionValue>			
 			</option>
+			<!-- ******************************************************************************* -->			
 			<option
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.isa.base"
 				isAbstract="true"
