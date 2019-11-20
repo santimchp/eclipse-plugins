@@ -8,8 +8,8 @@ public class ArchStringGenerator {
 	private String archOptionValue;
 	private boolean multiplyOptionValue;
 	private boolean atomicOptionValue;
-	private boolean compressedOption;
-	private String floatingPointOption;
+	private boolean compressedOptionValue;
+	private String floatingPointOptionValue;
 
 	public ArchStringGenerator(IOption archOption, IOption multiplyOption, IOption atomicOption,
 			IOption compressedOption, IOption floatingPointOption) throws BuildException {
@@ -17,8 +17,8 @@ public class ArchStringGenerator {
 		this.archOptionValue = archOption.getValue().toString();
 		this.multiplyOptionValue = multiplyOption.getBooleanValue();
 		this.atomicOptionValue = atomicOption.getBooleanValue();
-		this.compressedOption = compressedOption.getBooleanValue();
-		this.floatingPointOption = floatingPointOption.getValue().toString();
+		this.compressedOptionValue = compressedOption.getBooleanValue();
+		this.floatingPointOptionValue = floatingPointOption.getValue().toString();
 	}
 
 	public String getString() {
@@ -27,8 +27,8 @@ public class ArchStringGenerator {
 		builder.append(getArchOptionValueFromString(archOptionValue));
 		builder.append(multiplyOptionValue?"m":"");
 		builder.append(atomicOptionValue?"a":"");
-		builder.append(getFloatingPointOptionFromString(floatingPointOption));
-		builder.append(compressedOption?"c":"");
+		builder.append(getFloatingPointOptionFromString(floatingPointOptionValue));
+		builder.append(compressedOptionValue?"c":"");
 		
 		return builder.toString();
 	}

@@ -42,7 +42,8 @@ public class Option {
 	public static final String OPTION_TARGET_ALIGN = OPTION_TARGET + "align";
 	public static final String OPTION_TARGET_SAVERESTORE = OPTION_TARGET + "saverestore";
 	public static final String OPTION_TARGET_VALIDATE = OPTION_TARGET + "validate";
-	public static final String OPTION_TARGET_VALIDATE_SELECTOR = OPTION_TARGET + "validate";
+//	public static final String OPTION_TARGET_VALIDATE_SELECTOR = OPTION_TARGET + "validate";
+	public static final String OPTION_TARGET_VALIDATE_SELECTOR2 = OPTION_TARGET + "validate";
 	public static final String OPTION_TARGET_LABEL = OPTION_TARGET + "label";
 	public static final String OPTION_TARGET_MEMCPY = OPTION_TARGET + "memcpy";
 	
@@ -570,8 +571,15 @@ public class Option {
 		if (sValue != null && sValue.length() > 0) {
 			sReturn += " " + sValue;
 		}
-		
-		sValue = getOptionEnumCommand(config, OPTION_TARGET_VALIDATE_SELECTOR);
+//		sValue = getOptionStringValue(config, OPTION_TARGET_VALIDATE_SELECTOR);
+//		if (sValue != null && sValue.length() > 0) {
+//			sReturn += " " + sValue;
+//		}
+		sValue = getOptionStringValue(config, OPTION_TARGET_VALIDATE);
+		if (sValue != null && sValue.length() > 0) {
+			sReturn += " " + sValue;
+		}
+		sValue = getOptionStringValue(config, OPTION_TARGET_VALIDATE_SELECTOR2);
 		if (sValue != null && sValue.length() > 0) {
 			sReturn += " " + sValue;
 		}
@@ -580,12 +588,6 @@ public class Option {
 		if (sValue != null && sValue.length() > 0) {
 			sReturn += " " + sValue;
 		}
-		
-		sValue = getOptionStringValue(config, OPTION_TARGET_VALIDATE);
-		if (sValue != null && sValue.length() > 0) {
-			sReturn += " " + sValue;
-		}
-		
 		sValue = getOptionBooleanCommand(config, OPTION_TARGET_LABEL);
 		if (sValue != null && sValue.length() > 0) {
 			sReturn += " " + sValue;

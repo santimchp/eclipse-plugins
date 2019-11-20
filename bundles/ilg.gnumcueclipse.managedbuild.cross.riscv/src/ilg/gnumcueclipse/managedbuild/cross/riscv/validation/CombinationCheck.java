@@ -33,7 +33,7 @@ import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.properties.ProjectToolchain
 
 public class CombinationCheck {
 	//VALIDATION
-	public static final String VALIDATION_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validate"; 				
+	public static final String VALIDATION_FIELD = ".*ilg\\.gnumcueclipse\\.managedbuild\\.cross\\.riscv\\.option\\.target\\.validate\\..*";				
 	//ARCHITECTURE
 	public static final String ARCH_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.isa.base";
 	public static final String MULTIPLY_FIELD="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.isa.multiply";
@@ -62,7 +62,7 @@ public class CombinationCheck {
 	public String prev = null;
 	public String actual = null;
 	
-	public void checkandDisplay(IHoldsOptions holder, String combinationsString, String selection)  {
+	public void checkandDisplay(IHoldsOptions holder, String combinationsString)  {
 	
 		//Architecture options
 		IOption archOption = getOptionFor(holder, ARCH_FIELD);
@@ -82,7 +82,36 @@ public class CombinationCheck {
 		String errorMessage=null;
 		if ((errorMessage=checkValidationPairMultiLib(archString, abiString, combinationsString))!=null){
 			
-	    	displayMsgValidationError(errorMessage, holder, selection );
+//	    	displayMsgValidationError(errorMessage, holder );
+			System.out.println("EEERRRROOOORRRR::::::::::::: --> "+errorMessage);
+			
+			//-------------------------------------------------------
+			
+//			IOption validateSelectorOption = Arrays.asList(holder.getOptions()).stream()
+//					.filter(candidate -> candidate.getId().contains(VALIDATION_FIELD)).findFirst().orElse(null);
+//			
+//			validateSelectorOption.setValue(errorMessage);
+//			
+			
+			IOption validationMessage=null;
+			for (IOption testOption: holder.getOptions()){
+				
+				if (testOption.getId().matches(VALIDATION_FIELD)){                               
+					System.out.println("=====================================testOption::: "+ testOption);
+					validationMessage=testOption;
+					System.out.println("=================================validationMessage::: "+validationMessage);
+//					validationMessage.setValue(errorMessage);
+					break;
+				}
+			}
+			try {
+				(validationMessage).setValue(errorMessage);
+			} catch (BuildException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//---------------------------------------------------------
 	
 	    }
 		else {
@@ -90,7 +119,7 @@ public class CombinationCheck {
 		}
 		}
 		catch(BuildException e){
-			displayMsgValidationError(e.getMessage(), holder, selection);
+			displayMsgValidationError(e.getMessage(), holder);
 		}
 	}
 
@@ -118,15 +147,59 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 				return returnVal;
 			}
 		}
-		return "INVALID COMBINATION: " + selectedArchitecture + " and " + selectedAbi;
+		
+		//====== Check for G then I, M, A, F, D ==================================
+		if (selectedArchitecture.contains("g")) {
+			selectedArchitecture = selectedArchitecture.replaceAll("g", "imafd");
+			selectedArchitecture = removeDuplicates(selectedArchitecture);
+		}
+		return "INVALID COMBINATION (Architecture: " + selectedArchitecture + " and ABI: " + selectedAbi +")";
 	}
 
-	public static void displayMsgValidationError(String errorMessage, IHoldsOptions holder, String selection) {
+	//--- method to remove duplicates from architecture when string contains "g".---
+	//	Convert the string to an array of char, and store it in a LinkedHashSet. 
+	// That will preserve the ordering, and remove duplicates:
+	private String removeDuplicates(String selectedArchitecture) {
+		
+			char[] characters = selectedArchitecture.toCharArray();
+			boolean[] found = new boolean[256];
+			StringBuilder sb = new StringBuilder();
+			
+			System.out.println("String with duplicates : " + selectedArchitecture);
+			
+			for (char c : characters) {
+				if (!found[c]) {
+				    found[c] = true;
+				    sb.append(c);
+				}
+			}
+			
+			System.out.println("String after duplicates removed : " + sb.toString());
+			selectedArchitecture =  sb.toString();
+			return selectedArchitecture;
+		    }
+	
+	//------------- different solution -------------
+	// It uses HashSet instead of the slightly more costly LinkedHashSet, 
+	// and reuses the chars buffer for the result, eliminating the need for a StringBuilder:
+//	String string = "aabbccdefatafaz";
+//
+//	char[] chars = string.toCharArray();
+//	Set<Character> present = new HashSet<>();
+//	int len = 0;
+//	for (char c : chars)
+//	    if (present.add(c))
+//	        chars[len++] = c;
+//
+//	System.out.println(new String(chars, 0, len));   // abcdeftz
+	//========================================================================================================
+
+	public static void displayMsgValidationError(String errorMessage, IHoldsOptions holder) {
 			// MessageDialog.openError( null, "Validation Error",  errorMessage);
 		
 			IOption validationMessage=null;
 			for (IOption testOption: holder.getOptions()){
-				if (testOption.getId().contains(VALIDATION_FIELD)){                               
+				if (testOption.getId().matches(VALIDATION_FIELD)){                               
 					validationMessage=testOption;
 					break;
 				}
@@ -144,7 +217,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			IOption validationMessage=null;
 			
 			for (IOption testOption: holder.getOptions()){
-				if (testOption.getId().contains(VALIDATION_FIELD)){                               
+				if (testOption.getId().matches(VALIDATION_FIELD)){                               
 					validationMessage=testOption;
 					break;
 				}
@@ -164,7 +237,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 		
 		IOption validationMessage=null;
 		for (IOption testOption: holder.getOptions()){
-			if (testOption.getId().contains(VALIDATION_FIELD)){                               
+			if (testOption.getId().matches(VALIDATION_FIELD)){                               
 				validationMessage=testOption;
 				break;
 			}

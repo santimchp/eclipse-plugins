@@ -202,7 +202,6 @@
 			</option>
 		</tool>
 		<tool
-			
 			id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.compiler"
 			isAbstract="true"
 			name="Compiler common options">
@@ -218,8 +217,6 @@
 			isAbstract="true"
 			name="RISC-V Targets common options">
 			<option
-				command="-validate"
-				commandFalse="-do-not-validate"
 				defaultValue="No message"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate"
 				isAbstract="false"
@@ -230,28 +227,13 @@
 			</option>					
 			<!-- ******************************************************************************* -->
 			<option
-				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validateselector"
+				defaultValue="false"
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.checkboxval"
 				isAbstract="true"
 				name="%option.target.validate"
+				valueType="boolean"
 				tip="Use to validate combination (Architecture-ABI)"
-				valueType="enumerated"
-				
 				applicabilityCalculator="ilg.gnumcueclipse.managedbuild.cross.riscv.validation.ValidationImplementor">
-				<enumeratedOptionValue
-					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateoff"
-					isDefault="true"
-					name="%option.target.validate.off">
-				</enumeratedOptionValue>
-				<enumeratedOptionValue
-					command="-mcmodel=medany"
-					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateon"
-					name="%option.target.validate.on">
-				</enumeratedOptionValue>
-				<enumeratedOptionValue
-					command="-mcmodel=medlow"
-					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validatewarning"
-					name="%option.target.validate.warning">
-				</enumeratedOptionValue>			
 			</option>
 			<option
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.isa.base"
@@ -820,16 +802,16 @@
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.other"
 				superClass="ilg.gnumcueclipse.managedbuild.cross.option.base.target.other">
 			</option>
+			<option   
+				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
+				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.checkboxval"
+				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.checkboxval">
+			</option>	
 			<option
 				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validate"
 				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate">
-			</option>
-			<option   
-				category="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.target"
-				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateselector"
-				superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validateselector">
-			</option>
+			</option>					
 			<!-- ===== Debugging ========================================== -->
 			<optionCategory
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.optionCategory.optimization"

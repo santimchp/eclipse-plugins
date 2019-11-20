@@ -24,10 +24,8 @@ import org.eclipse.osgi.service.datalocation.Location;
 
 public class ValidationImplementor implements IOptionApplicability {
 
-	public static final String VALIDATION_SELECTOR_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateselector";
-	public static final String VALIDATION_SELECTOR_ON = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateon";
-	public static final String VALIDATION_SELECTOR_OFF = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validateoff";
-	public static final String VALIDATION_SELECTOR_WARNING = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validatewarning";
+	public static final String VALIDATION_SELECTOR_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.checkboxval";
+//	public static final String VALIDATION_SELECTOR_FIELD = ".*ilg\\.gnumcueclipse\\.managedbuild\\.cross\\.riscv\\.option\\.target\\.validateselector3\\..*";	
 
 	@Override
 	public boolean isOptionUsedInCommandLine(IBuildObject configuration, IHoldsOptions holder, IOption option) {
@@ -43,31 +41,50 @@ public class ValidationImplementor implements IOptionApplicability {
 	public boolean isOptionEnabled(IBuildObject configuration, IHoldsOptions holder, IOption option) {
 
 		boolean returnValue = true;
+			
 		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite().get
 
 //			IOption validateOption = Arrays.asList(holder.getOptions()).stream().filter(candidate->candidate.getId().contains(VALIDATION_FIELD)).findFirst().orElse(null);
 		IOption validateSelectorOption = Arrays.asList(holder.getOptions()).stream()
 				.filter(candidate -> candidate.getId().contains(VALIDATION_SELECTOR_FIELD)).findFirst().orElse(null);
-
+		
 		// path (get the combination entered in Workspace scope - eclipse properties)
 		String combinationsString = Platform.getPreferencesService().getRootNode().node(InstanceScope.SCOPE)
 				.node("ilg.gnumcueclipse.managedbuild.cross.riscv").get("combinationsSet", "not found");
 		System.out.println("Value is: " + combinationsString);
+		
+		
+		//=======================================================Enable tick selection from Combination preferences page=======================================================
+//		String EnableValidation = Platform.getPreferencesService().getRootNode().node(InstanceScope.SCOPE)
+//				.node("ilg.gnumcueclipse.managedbuild.cross.riscv").get("EnableValidation", "not found");
+//
+//		System.out.println("EnableValidation Value is:::::::::::::::::::::::::::::::::::::::::::::::::::::: " + EnableValidation.toString());
+//		
+//		if (EnableValidation.equals("true")){
+//			try {
+//				validateSelectorOption.setValue(true);
+//			} catch (BuildException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		else if (EnableValidation.equals("not found")){
+//			try {
+//				validateSelectorOption.setValue(false);
+//			} catch (BuildException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
+		//=====================================================================================================================================================================
 
-		switch (validateSelectorOption.getValue().toString()) {
-		case VALIDATION_SELECTOR_ON:
-			new CombinationCheck().checkandDisplay(holder, combinationsString, "ON");
-			break;
-
-		case VALIDATION_SELECTOR_OFF:
-			new CombinationCheck().clearMsg(holder);
-			break;
-
-		case VALIDATION_SELECTOR_WARNING:
-			new CombinationCheck().checkandDisplay(holder, combinationsString, "WARNING");
-			break;
-
+		if (validateSelectorOption.getValue().equals(true) ) {
+			new CombinationCheck().checkandDisplay(holder, combinationsString);
 		}
+		else if (validateSelectorOption.getValue().equals(false) ) {
+			new CombinationCheck().clearMsg(holder);
+		}
+
 		return returnValue;
 	}
 }
