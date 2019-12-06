@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
@@ -236,6 +237,8 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 		
 		
 		IOption validationMessage=null;
+		//Just for testing purposes:
+//		System.out.println(Arrays.asList(holder.getOptions()).stream().map(x->x.getId()).collect(Collectors.toList()));
 		for (IOption testOption: holder.getOptions()){
 			if (testOption.getId().matches(VALIDATION_FIELD)){                               
 				validationMessage=testOption;
@@ -243,7 +246,9 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			}
 		}
 		try {
-			((validationMessage)).setValue("Validation off");
+			if (validationMessage!=null){
+				((validationMessage)).setValue("Validation off");
+			}
 //			GlobalToolchainsPathsPreferencesPage z = new GlobalToolchainsPathsPreferencesPage();
 //			z.setVisible(true);
 		} catch (BuildException e) {
