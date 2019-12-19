@@ -2488,7 +2488,7 @@
 			</language-scope>
 		</provider>
 	</extension>
-<!--	<extension point="org.eclipse.cdt.ui.cPropertyTab">
+	<extension point="org.eclipse.cdt.ui.cPropertyTab">
 		<tab
 			class="ilg.gnumcueclipse.managedbuild.cross.riscv.ui.TabToolchains"
 			helpId="cdt_u_prop_build_setting_tool"
@@ -2498,7 +2498,7 @@
 			tooltip="Select and configure the toolchain  "
 			weight="012">
 		</tab>
-	</extension> -->
+	</extension>
 	<extension point="ilg.gnumcueclipse.debug.core.cprojectExtra">
 		<factory
 			class="ilg.gnumcueclipse.managedbuild.cross.xpi.CProjectExtraDataManagerFactory">
