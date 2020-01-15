@@ -15,6 +15,7 @@ import ilg.gnumcueclipse.core.EclipseUtils;
 import ilg.gnumcueclipse.core.preferences.ScopedPreferenceStoreWithoutDefaults;
 import ilg.gnumcueclipse.core.ui.FieldEditorPropertyPage;
 import ilg.gnumcueclipse.core.ui.LabelFakeFieldEditor;
+import ilg.gnumcueclipse.core.ui.StringVariableFieldEditor;
 import ilg.gnumcueclipse.core.ui.XpackDirectoryNotStrictFieldEditor;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.DefaultPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.PersistentPreferences;
@@ -119,6 +120,16 @@ public class ProjectToolchainsPathPropertiesPage extends FieldEditorPropertyPage
 
 			addField(toolchainPathField);
 		}
+		
+		//---Sanity check multilib combinations------------------------------
+	    
+		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
+		FieldEditor labelField2 = new StringVariableFieldEditor("combinationsSet", "projectMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
+		labelField2.setEnabled(true, getFieldEditorParent());
+//		labelField2.fillIntoGrid(getFieldEditorParent(), 1);
+		addField(labelField2);
+		
+		//-------------------------------------------------------------------
 	}
 
 	// ------------------------------------------------------------------------

@@ -11,29 +11,43 @@
 
 package ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences;
 
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import ilg.gnumcueclipse.core.EclipseUtils;
 import ilg.gnumcueclipse.core.ui.LabelFakeFieldEditor;
+import ilg.gnumcueclipse.core.ui.StringVariableFieldEditor;
 import ilg.gnumcueclipse.core.ui.XpackDirectoryNotStrictFieldEditor;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.DefaultPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.PersistentPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Activator;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Option;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.Messages;
+import ilg.gnumcueclipse.managedbuild.cross.riscv.validation.CombinationCheck;
+import ilg.gnumcueclipse.managedbuild.cross.riscv.validation.ValidationImplementor;
 
 import org.eclipse.cdt.managedbuilder.core.BuildException;
+import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
+import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.internal.IPreferenceConstants;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
@@ -90,7 +104,6 @@ public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferenceP
 
 	@Override
 	protected void createFieldEditors() {
-
 		boolean isStrict;
 
 		FieldEditor toolchainNameField = new ToolchainsFieldEditor(PersistentPreferences.TOOLCHAIN_NAME_KEY,
@@ -144,6 +157,16 @@ public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferenceP
 
 			addField(toolchainPathField);
 		}
+		
+		//---Sanity check multilib combinations------------------------------
+		    
+		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
+		FieldEditor labelField2 = new StringVariableFieldEditor("combinationsSet", "globalMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
+		labelField2.setEnabled(true, getFieldEditorParent());
+//		labelField2.fillIntoGrid(getFieldEditorParent(), 1);
+		addField(labelField2);
+		
+		//-------------------------------------------------------------------
 	}
 
 	// ------------------------------------------------------------------------

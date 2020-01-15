@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.dialogs.PropertyDialogAction;
 
 import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences.GlobalToolchainsPathsPreferencesPage;
-import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences.WorkspaceToolchainsCombinatiosPreferencesPage;
+//import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences.WorkspaceToolchainsCombinatiosPreferencesPage;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.properties.ProjectToolchainsPathPropertiesPage;
 
 public class CombinationCheck {
@@ -108,7 +108,6 @@ public class CombinationCheck {
 			try {
 				(validationMessage).setValue(errorMessage);
 			} catch (BuildException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -208,7 +207,6 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			try {
 				((validationMessage)).setValue(errorMessage);
 			} catch (BuildException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
@@ -226,13 +224,11 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			try {
 				((validationMessage)).setValue("Supported combination");
 			} catch (BuildException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
 
 	public void clearMsg(IHoldsOptions holder) {
-		// TODO Auto-generated method stub
 		System.out.println("ClearMsg() called");
 		
 		
@@ -252,7 +248,6 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 //			GlobalToolchainsPathsPreferencesPage z = new GlobalToolchainsPathsPreferencesPage();
 //			z.setVisible(true);
 		} catch (BuildException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

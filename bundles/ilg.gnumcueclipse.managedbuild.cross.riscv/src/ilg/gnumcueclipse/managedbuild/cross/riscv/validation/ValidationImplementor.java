@@ -41,8 +41,6 @@ public class ValidationImplementor implements IOptionApplicability {
 	public boolean isOptionEnabled(IBuildObject configuration, IHoldsOptions holder, IOption option) {
 
 		boolean returnValue = true;
-			
-		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite().get
 
 //			IOption validateOption = Arrays.asList(holder.getOptions()).stream().filter(candidate->candidate.getId().contains(VALIDATION_FIELD)).findFirst().orElse(null);
 		IOption validateSelectorOption = Arrays.asList(holder.getOptions()).stream()

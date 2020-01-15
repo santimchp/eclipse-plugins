@@ -14,6 +14,7 @@ package ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences;
 import ilg.gnumcueclipse.core.EclipseUtils;
 import ilg.gnumcueclipse.core.preferences.ScopedPreferenceStoreWithoutDefaults;
 import ilg.gnumcueclipse.core.ui.LabelFakeFieldEditor;
+import ilg.gnumcueclipse.core.ui.StringVariableFieldEditor;
 import ilg.gnumcueclipse.core.ui.XpackDirectoryNotStrictFieldEditor;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.DefaultPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.preferences.PersistentPreferences;
@@ -88,7 +89,6 @@ public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferen
 	 */
 	@Override
 	protected void createFieldEditors() {
-
 		boolean isStrict;
 
 		FieldEditor toolchainNameField = new ToolchainsFieldEditor(PersistentPreferences.TOOLCHAIN_NAME_KEY,
@@ -142,6 +142,16 @@ public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferen
 
 			addField(toolchainPathField);
 		}
+		
+		//---Sanity check multilib combinations------------------------------
+	    
+		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
+		FieldEditor labelField2 = new StringVariableFieldEditor("combinationsSet", "workspaceMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
+		labelField2.setEnabled(true, getFieldEditorParent());
+//		labelField2.fillIntoGrid(getFieldEditorParent(), 1);
+		addField(labelField2);
+		
+		//-------------------------------------------------------------------
 	}
 
 	// ------------------------------------------------------------------------
