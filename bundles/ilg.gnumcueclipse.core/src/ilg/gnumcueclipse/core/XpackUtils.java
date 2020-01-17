@@ -44,30 +44,44 @@ public class XpackUtils {
 		return true;
 	}
 
+	public static IPath getRepoBasePath() {
+		
+		Map<String, String> env = System.getenv();
+		
+		if (EclipseUtils.isMacOSX()) {
+			String homeFolder = env.get("HOME");
+			IPath path = new Path(homeFolder);
+			return path.append("/Library");
+		} else if (EclipseUtils.isLinux()) {
+			String homeFolder = env.get("HOME");
+			IPath path = new Path(homeFolder);
+			return path.append("/opt");
+		} else if (EclipseUtils.isWindows()) {
+			String homeFolder = env.get("APPDATA");
+			IPath path = new Path(homeFolder);
+			return path;
+		}
+		return null;
+	}
+	
 	public static IPath getRepoPath() {
 
 		Map<String, String> env = System.getenv();
 		String folder = env.get("XPACKS_REPO_FOLDER");
+		
+		IPath path;
 		if (folder != null) {
-			IPath path = new Path(folder);
+			path = new Path(folder);
 			if (path.toFile().isDirectory()) {
 				return path;
 			}
 		}
 
-		if (EclipseUtils.isMacOSX()) {
-			String homeFolder = env.get("HOME");
-			IPath path = new Path(homeFolder);
-			return path.append("/Library/xPacks");
-		} else if (EclipseUtils.isLinux()) {
-			String homeFolder = env.get("HOME");
-			IPath path = new Path(homeFolder);
-			return path.append("/opt/xPacks");
-		} else if (EclipseUtils.isWindows()) {
-			String homeFolder = env.get("APPDATA");
-			IPath path = new Path(homeFolder);
+		path = getRepoBasePath();
+		if (path != null) {
 			return path.append("xPacks");
 		}
+
 		return null;
 	}
 
@@ -81,37 +95,43 @@ public class XpackUtils {
 		}
 	}
 
-	public static String[] getPackVersions(String packName) {
-
-		IPath packPath = getPackPath(packName);
-		File folder = packPath.toFile();
-		if (!folder.isDirectory()) {
-			return new String[] {};
-		}
+	public static String[] getPackVersions(String[] packNames) {
 
 		List<String> list = new LinkedList<String>();
 
-		folder.listFiles(new FilenameFilter() {
+		for (String packName : packNames) {
+			IPath packPath = getPackPath(packName);
+			File folder = packPath.toFile();
+			if (folder.isDirectory()) {
+				
+				folder.listFiles(new FilenameFilter() {
 
-			@Override
-			public boolean accept(File dir, String name) {
-				IPath path = (new Path(dir.getAbsolutePath())).append(name);
-				if (path.toFile().isDirectory()) {
-					IPath packagePath = path.append("package.json");
-					if (packagePath.toFile().isFile()) {
-						if (".link".equals(name)) {
-							list.add("current");
-						} else {
-							list.add(name);
+					@Override
+					public boolean accept(File dir, String name) {
+						IPath path = (new Path(dir.getAbsolutePath())).append(name);
+						if (path.toFile().isDirectory()) {
+							IPath packagePath = path.append("package.json");
+							if (packagePath.toFile().isFile()) {
+								if (".link".equals(name)) {
+									list.add("current");
+								} else {
+									list.add(name);
+								}
+								return true;
+							}
+
 						}
-						return true;
+						return false;
 					}
 
-				}
-				return false;
+				});
 			}
+		}
+		
+		if (list.isEmpty()) {
+			return new String[] {};		
+		}
 
-		});
 
 		Collections.sort(list, new Comparator<String>() {
 			@Override

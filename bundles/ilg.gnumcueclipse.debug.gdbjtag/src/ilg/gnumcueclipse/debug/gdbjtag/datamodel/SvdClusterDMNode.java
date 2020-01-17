@@ -95,6 +95,7 @@ public class SvdClusterDMNode extends SvdDMNode {
 		return array;
 	}
 
+	@Override
 	public BigInteger getBigAddressOffset() {
 		String str = getNode().getProperty("addressOffset");
 		if (!str.isEmpty()) {
@@ -102,6 +103,15 @@ public class SvdClusterDMNode extends SvdDMNode {
 		} else {
 			return BigInteger.ZERO;
 		}
+	}
+
+	@Override
+	public BigInteger getBigRepeatIncrement() {
+		BigInteger bigRepeatIncrement = getBigArrayAddressIncrement();
+		if (bigRepeatIncrement != BigInteger.ZERO) {
+			return bigRepeatIncrement;
+		}
+		return null;
 	}
 
 	// ------------------------------------------------------------------------

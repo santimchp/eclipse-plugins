@@ -305,6 +305,15 @@ public class Repos {
 		}
 	}
 
+	public String getRepoContentXmlFromName(String name) {
+		for (Map<String, Object> repo : fList) {
+			if (name.equals(repo.get("name"))) {
+				return getRepoContentXmlFromUrl((String) repo.get("url"));
+			}
+		}
+		return null;
+	}
+
 	public String getRepoContentXmlFromUrl(String url) {
 
 		String fileName = PacksStorage.CACHE_FOLDER + "/" + PacksStorage.CONTENT_FILE_NAME_PREFIX
@@ -385,7 +394,7 @@ public class Repos {
 
 		long beginTime = System.currentTimeMillis();
 
-		fOut.println("Parsing cached content file \"" + file.getPath() + "\"...");
+		fOut.println("Parsing cached content file \"" + file.getCanonicalPath() + "\"...");
 
 		if (!file.exists()) {
 			throw new IOException("File does not exist, ignored.");

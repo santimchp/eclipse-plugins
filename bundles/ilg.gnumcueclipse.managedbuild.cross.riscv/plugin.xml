@@ -195,6 +195,11 @@
 					name="%option.optimization.level.size">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-Ofast"
+					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.fast"
+					name="%option.optimization.level.fast">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-Og"
 					id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.debug"
 					name="%option.optimization.level.debug">
@@ -629,6 +634,7 @@
 				osList="all">
 			</targetPlatform>
 			<builder
+				buildfileGenerator="ilg.gnumcueclipse.managedbuild.cross.GnuMcuMakefileGenerator"
 				command="${cross_make}"
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.builder"
 				superClass="cdt.managedbuild.target.gnu.builder">
@@ -1246,6 +1252,11 @@
 						name="%option.c.compiler.std.ansi">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=iso9899:199409"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.iso9899.1994090"
+						name="%option.c.compiler.std.iso9899.1994090">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=gnu90"
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.gnu90"
 						name="%option.c.compiler.std.gnu90">
@@ -1270,6 +1281,26 @@
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.gnu11"
 						isDefault="true"
 						name="%option.c.compiler.std.gnu11">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c17"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.c17"
+						name="%option.c.compiler.std.c17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu17"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.gnu17"
+						name="%option.c.compiler.std.gnu17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c2x"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.c2x"
+						name="%option.c.compiler.std.c2x">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu2x"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.c.compiler.std.gnu2x"
+						name="%option.c.compiler.std.gnu2x">
 					</enumeratedOptionValue>
 				</option>
 				<option
@@ -1429,14 +1460,19 @@
 						name="%option.cpp.compiler.std.gnucpp98">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=c++0x"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp0x"
+						name="%option.cpp.compiler.std.cpp0x">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=c++11"
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp11"
 						name="%option.cpp.compiler.std.cpp11">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=c++0x"
-						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp0x"
-						name="%option.cpp.compiler.std.cpp0x">
+						command="-std=gnu++0x"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp0x"
+						name="%option.cpp.compiler.std.gnucpp0x">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=gnu++11"
@@ -1445,9 +1481,9 @@
 						name="%option.cpp.compiler.std.gnucpp11">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=gnu++0x"
-						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp0x"
-						name="%option.cpp.compiler.std.gnucpp0x">
+						command="-std=c++1y"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp1y"
+						name="%option.cpp.compiler.std.cpp1y">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=c++14"
@@ -1455,9 +1491,9 @@
 						name="%option.cpp.compiler.std.cpp14">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=c++1y"
-						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp1y"
-						name="%option.cpp.compiler.std.cpp1y">
+						command="-std=gnu++1y"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp1y"
+						name="%option.cpp.compiler.std.gnucpp1y">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=gnu++14"
@@ -1465,19 +1501,34 @@
 						name="%option.cpp.compiler.std.gnucpp14">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=gnu++1y"
-						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp1y"
-						name="%option.cpp.compiler.std.gnucpp1y">
-					</enumeratedOptionValue>
-					<enumeratedOptionValue
 						command="-std=c++1z"
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp1z"
 						name="%option.cpp.compiler.std.cpp1z">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=c++17"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp17"
+						name="%option.cpp.compiler.std.cpp17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=gnu++1z"
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp1z"
 						name="%option.cpp.compiler.std.gnucpp1z">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu++17"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp17"
+						name="%option.cpp.compiler.std.gnucpp17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c++2a"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.cpp2a"
+						name="%option.cpp.compiler.std.cpp2a">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu++2a"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.std.gnucpp2a"
+						name="%option.cpp.compiler.std.gnucpp2a">
 					</enumeratedOptionValue>
 				</option>
 				<option
@@ -1540,6 +1591,26 @@
 						command="-fabi-version=9"
 						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.abiversion.9"
 						name="%option.cpp.compiler.abiversion.9">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=10"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.abiversion.10"
+						name="%option.cpp.compiler.abiversion.10">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=11"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.abiversion.11"
+						name="%option.cpp.compiler.abiversion.11">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=12"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.abiversion.12"
+						name="%option.cpp.compiler.abiversion.12">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=13"
+						id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.cpp.compiler.abiversion.13"
+						name="%option.cpp.compiler.abiversion.13">
 					</enumeratedOptionValue>
 				</option>
 				<option

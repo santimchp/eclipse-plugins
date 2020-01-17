@@ -194,6 +194,11 @@
 					name="%option.optimization.level.size">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-Ofast"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level.fast"
+					name="%option.optimization.level.fast">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-Og"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level.debug"
 					name="%option.optimization.level.debug">
@@ -503,9 +508,19 @@
 					name="cortex-a15">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-mcpu=cortex-a15.cortex-a7"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a15-cortex-a7"
+					name="cortex-a15.cortex-a7">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-mcpu=cortex-a17"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a17"
 					name="cortex-a17">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a17.cortex-a7"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a17-cortex-a7"
+					name="cortex-a17.cortex-a7">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-mcpu=cortex-a32"
@@ -528,9 +543,19 @@
 					name="cortex-a53">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-mcpu=cortex-a55"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a55"
+					name="cortex-a55">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-mcpu=cortex-a57"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a57"
 					name="cortex-a57">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a57.cortex-a53"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a57-cortex-a53"
+					name="cortex-a57.cortex-a53">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-mcpu=cortex-a7"
@@ -541,6 +566,36 @@
 					command="-mcpu=cortex-a72"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a72"
 					name="cortex-a72">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a72.cortex-a35"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a72-cortex-a35"
+					name="cortex-a72.cortex-a35">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a72.cortex-a53"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a72-cortex-a53"
+					name="cortex-a72.cortex-a53">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a73"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a73"
+					name="cortex-a73">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a73.cortex-a53"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a73-cortex-a53"
+					name="cortex-a73.cortex-a53">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a75"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a75"
+					name="cortex-a75">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-a75.cortex-a55"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-a75-cortex-a55"
+					name="cortex-a75.cortex-a55">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-mcpu=cortex-a8"
@@ -622,6 +677,11 @@
 					command="-mcpu=cortex-r5"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-r5"
 					name="cortex-r5">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mcpu=cortex-r52"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcpu.cortex-r52"
+					name="cortex-r52">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-mcpu=cortex-r7"
@@ -835,7 +895,7 @@
 				<enumeratedOptionValue
 					command="-march=armv6k"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv6k"
-					name="armv6j">
+					name="armv6k (deprecated)">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-march=armv6s-m"
@@ -921,6 +981,26 @@
 					command="-march=armv8.1-a+crc"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv8-1-a-crc"
 					name="armv8.1-a+crc">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-march=armv8.2-a"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv8-2-a"
+					name="armv8.2-a">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-march=armv8.3-a"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv8-3-a"
+					name="armv8.3-a">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-march=armv8.4-a"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv8-4-a"
+					name="armv8.4-a">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-march=armv8-r"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.arch.armv8-r"
+					name="armv8-r">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-march=ep9312"
@@ -1172,6 +1252,11 @@
 					name="%option.target.arm.fpuType.default">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-mfpu=auto"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.auto"
+					name="%option.target.arm.fpuType.auto">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-mfpu=crypto-neon-fp-armv8"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.cryptoneonfparmv8"
 					name="%option.target.arm.fpuType.cryptoneonfparmv8">
@@ -1232,6 +1317,11 @@
 					name="%option.target.arm.fpuType.neonfparmv8">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
+					command="-mfpu=neon-vfpv3"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.neonvfpv3"
+					name="%option.target.arm.fpuType.neonvfpv3">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
 					command="-mfpu=neon-vfpv4"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.neonvfpv4"
 					name="%option.target.arm.fpuType.neonvfpv4">
@@ -1240,6 +1330,11 @@
 					command="-mfpu=vfp"
 					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.vfp"
 					name="%option.target.arm.fpuType.vfp">
+				</enumeratedOptionValue>
+				<enumeratedOptionValue
+					command="-mfpu=vfpv2"
+					id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.fpu.unit.vfpv2"
+					name="%option.target.arm.fpuType.vfpv2">
 				</enumeratedOptionValue>
 				<enumeratedOptionValue
 					command="-mfpu=vfpv3"
@@ -1313,6 +1408,25 @@
 					name="%option.target.arm.unalignedaccess.default">
 				</enumeratedOptionValue>
 			</option>
+   <option
+         command="-mcmse"
+         defaultValue="false"
+         id="ilg.gnuarmeclipse.managedbuild.cross.option.base.arm.target.mcmse"
+         isAbstract="true"
+         name="%option.target.arm.mcmse"
+         tip="Generate code that supports ARM TrustZone."
+         useByScannerDiscovery="true"
+         valueType="boolean">
+      <enablement
+            type="UI_ENABLEMENT|CMD_USAGE">
+         <checkOption
+               holderId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base"
+               isRegex="false"
+               optionId="ilg.gnuarmeclipse.managedbuild.cross.option.architecture"
+               value="ilg.gnuarmeclipse.managedbuild.cross.option.architecture.arm">
+         </checkOption>
+      </enablement>
+   </option>
 		</tool>
 		<tool
 			id="ilg.gnuarmeclipse.managedbuild.cross.tool.base.aarch64"
@@ -1568,6 +1682,7 @@
 				osList="all">
 			</targetPlatform>
 			<builder
+				buildfileGenerator="ilg.gnumcueclipse.managedbuild.cross.GnuMcuMakefileGenerator"
 				command="${cross_make}"
 				id="ilg.gnuarmeclipse.managedbuild.cross.builder"
 				superClass="cdt.managedbuild.target.gnu.builder">
@@ -1715,6 +1830,11 @@
 				id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.unalignedaccess"
 				superClass="ilg.gnuarmeclipse.managedbuild.cross.option.base.arm.target.unalignedaccess">
 			</option>
+   <option
+         category="ilg.gnuarmeclipse.managedbuild.cross.optionCategory.target"
+         id="ilg.gnuarmeclipse.managedbuild.cross.option.arm.target.mcmse"
+         superClass="ilg.gnuarmeclipse.managedbuild.cross.option.base.arm.target.mcmse">
+   </option>
 			<option
 				category="ilg.gnuarmeclipse.managedbuild.cross.optionCategory.target"
 				id="ilg.gnuarmeclipse.managedbuild.cross.option.aarch64.target.family"
@@ -2190,6 +2310,11 @@
 						name="%option.c.compiler.std.ansi">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=iso9899:199409"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.iso9899.1994090"
+						name="%option.c.compiler.std.iso9899.199409">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=gnu90"
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.gnu90"
 						name="%option.c.compiler.std.gnu90">
@@ -2214,6 +2339,26 @@
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.gnu11"
 						isDefault="true"
 						name="%option.c.compiler.std.gnu11">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c17"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.c17"
+						name="%option.c.compiler.std.c17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu17"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.gnu17"
+						name="%option.c.compiler.std.gnu17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c2x"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.c2x"
+						name="%option.c.compiler.std.c2x">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu2x"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.gnu2x"
+						name="%option.c.compiler.std.gnu2x">
 					</enumeratedOptionValue>
 				</option>
 				<option
@@ -2373,14 +2518,19 @@
 						name="%option.cpp.compiler.std.gnucpp98">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=c++0x"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp0x"
+						name="%option.cpp.compiler.std.cpp0x">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=c++11"
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp11"
 						name="%option.cpp.compiler.std.cpp11">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=c++0x"
-						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp0x"
-						name="%option.cpp.compiler.std.cpp0x">
+						command="-std=gnu++0x"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp0x"
+						name="%option.cpp.compiler.std.gnucpp0x">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=gnu++11"
@@ -2389,9 +2539,9 @@
 						name="%option.cpp.compiler.std.gnucpp11">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=gnu++0x"
-						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp0x"
-						name="%option.cpp.compiler.std.gnucpp0x">
+						command="-std=c++1y"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp1y"
+						name="%option.cpp.compiler.std.cpp1y">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=c++14"
@@ -2399,14 +2549,9 @@
 						name="%option.cpp.compiler.std.cpp14">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=c++17"
-						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp17"
-						name="%option.cpp.compiler.std.cpp17">
-					</enumeratedOptionValue>
-					<enumeratedOptionValue
-						command="-std=c++1y"
-						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp1y"
-						name="%option.cpp.compiler.std.cpp1y">
+						command="-std=gnu++1y"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp1y"
+						name="%option.cpp.compiler.std.gnucpp1y">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
 						command="-std=gnu++14"
@@ -2414,19 +2559,34 @@
 						name="%option.cpp.compiler.std.gnucpp14">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
-						command="-std=gnu++1y"
-						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp1y"
-						name="%option.cpp.compiler.std.gnucpp1y">
-					</enumeratedOptionValue>
-					<enumeratedOptionValue
 						command="-std=c++1z"
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp1z"
 						name="%option.cpp.compiler.std.cpp1z">
 					</enumeratedOptionValue>
 					<enumeratedOptionValue
+						command="-std=c++17"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp17"
+						name="%option.cpp.compiler.std.cpp17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
 						command="-std=gnu++1z"
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp1z"
 						name="%option.cpp.compiler.std.gnucpp1z">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu++17"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp17"
+						name="%option.cpp.compiler.std.gnucpp17">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=c++2a"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.cpp2a"
+						name="%option.cpp.compiler.std.cpp2a">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-std=gnu++2a"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.std.gnucpp2a"
+						name="%option.cpp.compiler.std.gnucpp2a">
 					</enumeratedOptionValue>
 				</option>
 				<option
@@ -2489,6 +2649,26 @@
 						command="-fabi-version=9"
 						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.abiversion.9"
 						name="%option.cpp.compiler.abiversion.9">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=10"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.abiversion.10"
+						name="%option.cpp.compiler.abiversion.10">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=11"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.abiversion.11"
+						name="%option.cpp.compiler.abiversion.11">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=12"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.abiversion.12"
+						name="%option.cpp.compiler.abiversion.12">
+					</enumeratedOptionValue>
+					<enumeratedOptionValue
+						command="-fabi-version=13"
+						id="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.abiversion.13"
+						name="%option.cpp.compiler.abiversion.13">
 					</enumeratedOptionValue>
 				</option>
 				<option

@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.console.MessageConsoleStream;
 
 import ilg.gnumcueclipse.core.StringUtils;
+import ilg.gnumcueclipse.packs.core.data.FileNotFoundException;
 
 public class Utils {
 
@@ -46,42 +47,6 @@ public class Utils {
 			}
 		}
 		return pushbackInputStream;
-	}
-
-	public static int getRemoteFileSize(URL url) throws IOException {
-
-		URLConnection connection;
-		while (true) {
-			connection = url.openConnection();
-			if ("file".equals(url.getProtocol())) { //$NON-NLS-1$
-				break;
-			}
-			if (connection instanceof HttpURLConnection) {
-				int responseCode = ((HttpURLConnection) connection).getResponseCode();
-				if (responseCode == HttpURLConnection.HTTP_OK) {
-					break;
-				} else {
-					if (responseCode == HttpURLConnection.HTTP_MOVED_TEMP
-							|| responseCode == HttpURLConnection.HTTP_MOVED_PERM
-							|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
-						String newUrl = connection.getHeaderField("Location");
-						url = new URL(newUrl);
-
-						// System.out.println("Redirect to URL : " + newUrl);
-					} else {
-						throw new IOException("Failed to open connection, response code " + responseCode);
-					}
-				}
-			}
-		}
-
-		int length = connection.getContentLength();
-
-		if (connection instanceof HttpURLConnection) {
-			((HttpURLConnection) connection).disconnect();
-		}
-
-		return length;
 	}
 
 	/**
@@ -160,6 +125,8 @@ public class Utils {
 						url = new URL(newUrl);
 
 						// System.out.println("Redirect to URL : " + newUrl);
+					} else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+						throw new FileNotFoundException("File \"" + url + "\" not found (" + responseCode + "), pack not installed.");
 					} else {
 						throw new IOException("Failed to open connection, response code " + responseCode);
 					}
@@ -167,29 +134,15 @@ public class Utils {
 			}
 		}
 
-		int size = connection.getContentLength();
-		if (size <= 0) {
-			throw new IOException("Illegal PDSC file size " + size);
-		}
-		String sizeString = StringUtils.convertSizeToString(size);
-		if (out != null) {
-			String s = destinationFile.getPath();
-			if (s.endsWith(".download")) {
-				s = s.substring(0, s.length() - ".download".length());
-			}
-			out.println("Copy " + sizeString);
-			out.println(" from \"" + url + "\"");
-			if (!url.equals(sourceUrl)) {
-				out.println(" redirected from \"" + sourceUrl + "\"");
-			}
-			out.println(" to   \"" + s + "\"");
-		}
-
 		destinationFile.getParentFile().mkdirs();
 
 		InputStream input = connection.getInputStream();
 		OutputStream output = new FileOutputStream(destinationFile);
 
+		// conn.getContentLength() returns -1 when the file is sent in
+		// chunks, so it cannot be used; instead it is computed.
+		int totalBytes = 0;
+		
 		byte[] buf = new byte[1024];
 		int bytesRead;
 		while ((bytesRead = input.read(buf)) > 0) {
@@ -197,9 +150,23 @@ public class Utils {
 			if (monitor != null) {
 				monitor.worked(bytesRead);
 			}
+			totalBytes += bytesRead;
 		}
 		output.close();
 		input.close();
+
+		if (out != null) {
+			String s = destinationFile.getCanonicalPath();
+			if (s.endsWith(".download")) {
+				s = s.substring(0, s.length() - ".download".length());
+			}
+			out.println("Copied " + totalBytes + " bytes");
+			out.println(" from \"" + url + "\"");
+			if (!url.equals(sourceUrl)) {
+				out.println(" redirected from \"" + sourceUrl + "\"");
+			}
+			out.println(" to   \"" + s + "\"");
+		}
 
 		if (connection instanceof HttpURLConnection) {
 			((HttpURLConnection) connection).disconnect();
@@ -215,8 +182,8 @@ public class Utils {
 			String sizeString = StringUtils.convertSizeToString(size);
 
 			out.println("Copy " + sizeString);
-			out.println(" from \"" + sourceFile + "\"");
-			out.println(" to   \"" + destinationFile + "\"");
+			out.println(" from \"" + sourceFile.getCanonicalPath() + "\"");
+			out.println(" to   \"" + destinationFile.getCanonicalPath() + "\"");
 		}
 
 		destinationFile.getParentFile().mkdirs();
@@ -334,5 +301,4 @@ public class Utils {
 
 		return message;
 	}
-
 }

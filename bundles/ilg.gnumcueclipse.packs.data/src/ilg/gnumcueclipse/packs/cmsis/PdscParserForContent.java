@@ -11,13 +11,6 @@
 
 package ilg.gnumcueclipse.packs.cmsis;
 
-import ilg.gnumcueclipse.core.Xml;
-import ilg.gnumcueclipse.packs.core.tree.Node;
-import ilg.gnumcueclipse.packs.core.tree.Property;
-import ilg.gnumcueclipse.packs.core.tree.Type;
-import ilg.gnumcueclipse.packs.data.Activator;
-import ilg.gnumcueclipse.packs.data.Utils;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -25,6 +18,14 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 import com.github.zafarkhaja.semver.Version;
+
+import ilg.gnumcueclipse.core.Xml;
+import ilg.gnumcueclipse.packs.core.data.PacksStorage;
+import ilg.gnumcueclipse.packs.core.tree.Node;
+import ilg.gnumcueclipse.packs.core.tree.Property;
+import ilg.gnumcueclipse.packs.core.tree.Type;
+import ilg.gnumcueclipse.packs.data.Activator;
+import ilg.gnumcueclipse.packs.data.Utils;
 
 public class PdscParserForContent extends PdscParser {
 
@@ -127,17 +128,19 @@ public class PdscParserForContent extends PdscParser {
 			verNode.putProperty(Property.ARCHIVE_URL, archiveUrl);
 			verNode.putProperty(Property.ARCHIVE_NAME, archiveName);
 
-			// Default as for unavailable packages
-			String size = "0";
-			try {
-				int sz = Utils.getRemoteFileSize(new URL(archiveUrl));
-				if (sz > 0) {
-					size = String.valueOf(sz);
+			if (isFirst) {
+				// Default as for unavailable packages
+				String size = "0";
+				try {
+					long sz = PacksStorage.getPackSize(archiveName, new URL(archiveUrl), fOut);
+					if (sz > 0) {
+						size = String.valueOf(sz);
+					}
+				} catch (IOException e) {
+					;
 				}
-			} catch (IOException e) {
-				;
+				verNode.putProperty(Property.ARCHIVE_SIZE, size);
 			}
-			verNode.putProperty(Property.ARCHIVE_SIZE, size);
 
 			String unpackFolder = packVendorName + "/" + packName + "/" + releaseName;
 			verNode.putProperty(Property.DEST_FOLDER, unpackFolder);
