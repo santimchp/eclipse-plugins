@@ -34,7 +34,9 @@ import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.properties.ProjectToolchain
 
 public class CombinationCheck {
 	//VALIDATION
-	public static final String VALIDATION_FIELD = ".*ilg\\.gnumcueclipse\\.managedbuild\\.cross\\.riscv\\.option\\.target\\.validate\\..*";				
+//	public static final String VALIDATION_FIELD = ".*ilg\\.gnumcueclipse\\.managedbuild\\.cross\\.riscv\\.option\\.target\\.validate\\..*";		
+	public static final String VALIDATION_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.validate";
+	
 	//ARCHITECTURE
 	public static final String ARCH_FIELD = "ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.isa.base";
 	public static final String MULTIPLY_FIELD="ilg.gnumcueclipse.managedbuild.cross.riscv.option.target.isa.multiply";
