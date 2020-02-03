@@ -155,7 +155,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			selectedArchitecture = selectedArchitecture.replaceAll("g", "imafd");
 			selectedArchitecture = removeDuplicates(selectedArchitecture);
 		}
-		return "INVALID COMBINATION (Architecture: " + selectedArchitecture + " and ABI: " + selectedAbi +")";
+		return "Unsupported combination (Architecture: " + selectedArchitecture + " and ABI: " + selectedAbi +")";
 	}
 
 	//--- method to remove duplicates from architecture when string contains "g".---
