@@ -146,10 +146,10 @@ public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferen
 		//---Sanity check multilib combinations------------------------------
 	    
 		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
-		FieldEditor labelField2 = new StringVariableFieldEditor("combinationsSet", "workspaceMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
-		labelField2.setEnabled(true, getFieldEditorParent());
+		FieldEditor combinationLabelField = new StringVariableFieldEditor("combinationsSet", "workspaceMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
+		combinationLabelField.setEnabled(true, getFieldEditorParent());
 //		labelField2.fillIntoGrid(getFieldEditorParent(), 1);
-		addField(labelField2);
+		addField(combinationLabelField);
 		
 		//-------------------------------------------------------------------
 	}
