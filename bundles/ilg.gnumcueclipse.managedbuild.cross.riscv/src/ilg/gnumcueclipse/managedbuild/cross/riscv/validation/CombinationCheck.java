@@ -109,6 +109,7 @@ public class CombinationCheck {
 			}
 			try {
 				(validationMessage).setValue(errorMessage);
+//				validationMessage.setCommand("");
 			} catch (BuildException e) {
 				e.printStackTrace();
 			}
@@ -138,6 +139,12 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 		// Nothing on first line, so split the 2nd line by spaces
 //		String[] validCombinations = lines2.get(1).split(" ");
 		System.out.println("USER DIR: " + System.getProperty("user.dir"));
+		
+		//====== Check for G then I, M, A, F, D ==================================
+				if (selectedArchitecture.contains("g")) {
+					selectedArchitecture = selectedArchitecture.replaceAll("g", "imafd");
+					selectedArchitecture = removeDuplicates(selectedArchitecture);
+				}
 
 		// Split the valid combinations
 		for (String validCombination : lines2) {
@@ -150,11 +157,6 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			}
 		}
 		
-		//====== Check for G then I, M, A, F, D ==================================
-		if (selectedArchitecture.contains("g")) {
-			selectedArchitecture = selectedArchitecture.replaceAll("g", "imafd");
-			selectedArchitecture = removeDuplicates(selectedArchitecture);
-		}
 		return "Unsupported combination (Architecture: " + selectedArchitecture + " and ABI: " + selectedAbi +")";
 	}
 
@@ -208,6 +210,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			}
 			try {
 				((validationMessage)).setValue(errorMessage);
+//				validationMessage.setCommand("");
 			} catch (BuildException e) {
 				e.printStackTrace();
 			}
@@ -225,6 +228,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 			}
 			try {
 				((validationMessage)).setValue("Supported combination");
+//				validationMessage.setCommand("");
 			} catch (BuildException e) {
 				e.printStackTrace();
 			}
@@ -246,6 +250,7 @@ private IOption getOptionFor(IHoldsOptions holder, String field) {
 		try {
 			if (validationMessage!=null){
 				((validationMessage)).setValue("Validation off");
+//				validationMessage.setCommand("");
 			}
 //			GlobalToolchainsPathsPreferencesPage z = new GlobalToolchainsPathsPreferencesPage();
 //			z.setVisible(true);

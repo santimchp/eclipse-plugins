@@ -222,7 +222,7 @@
 			isAbstract="true"
 			name="RISC-V Targets common options">
 			<option
-				defaultValue="No message"
+				defaultValue=""
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.validate"
 				isAbstract="false"
 				name=""
@@ -232,7 +232,7 @@
 			</option>					
 			<!-- ******************************************************************************* -->
 			<option
-				defaultValue="false"
+				defaultValue=""
 				id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.base.target.checkboxval"
 				isAbstract="true"
 				name="%option.target.validate"
