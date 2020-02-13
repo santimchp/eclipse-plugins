@@ -22,6 +22,7 @@ import ilg.gnumcueclipse.managedbuild.cross.preferences.PersistentPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Activator;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Option;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.Messages;
+import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.preferences.MultilibStringValidation;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +35,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.PropertyChangeEvent;
 
 public class ProjectToolchainsPathPropertiesPage extends FieldEditorPropertyPage {
 
@@ -47,7 +49,7 @@ public class ProjectToolchainsPathPropertiesPage extends FieldEditorPropertyPage
 	private DefaultPreferences fDefaultPreferences;
 
 	// ------------------------------------------------------------------------
-
+	
 	public ProjectToolchainsPathPropertiesPage() {
 		super(GRID);
 
@@ -67,7 +69,36 @@ public class ProjectToolchainsPathPropertiesPage extends FieldEditorPropertyPage
 		}
 		return null;
 	}
+	
+	//-------------------------------------------------------------------------
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getProperty().equals("field_editor_value")) {
 
+				if (doValidation(event.getNewValue().toString())==true) {
+					setValid(true);
+					setErrorMessage(null);
+//					super.performApply();
+//					super.propertyChange(event);
+				}
+				// if validation false
+				else {
+					setValid(false);
+					setErrorMessage("Invalid syntax -Supported multilibs combinations must comply the following syntax example: 'rv32iac-ilp32-- rv32iaf-ilp32f--'");
+				}
+		}
+	}
+
+	private boolean doValidation(String combinationsString) {
+		boolean result = false;
+		
+		if(MultilibStringValidation.isTrue(combinationsString)) {
+			System.out.println("isTrue");
+			result = true;
+		}
+		return result;
+	}	
+	//-------------------------------------------------------------------------
+	
 	@Override
 	protected void createFieldEditors() {
 		boolean isStrict;

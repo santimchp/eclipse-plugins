@@ -43,6 +43,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.ui.IWorkbench;
@@ -63,7 +64,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
-
+	
 	// ------------------------------------------------------------------------
 
 	public static final String ID = "ilg.gnumcueclipse.managedbuild.cross.riscv.preferencePage.globalToolchainsPaths";
@@ -74,7 +75,7 @@ public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferenceP
 	private DefaultPreferences fDefaultPreferences;
 
 	// ------------------------------------------------------------------------
-
+	
 	public GlobalToolchainsPathsPreferencesPage() {
 		super(GRID);
 
@@ -95,6 +96,35 @@ public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferenceP
 			System.out.println("riscv.GlobalToolchainsPathsPreferencesPage.init()");
 		}
 	}
+	
+	//-------------------------------------------------------------------------
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getProperty().equals("field_editor_value")) {
+
+				if (doValidation(event.getNewValue().toString())==true) {
+					setValid(true);
+					setErrorMessage(null);
+//					super.performApply();
+//					super.propertyChange(event);
+				}
+				// if validation false
+				else {
+					setValid(false);
+					setErrorMessage("Invalid syntax -Supported multilibs combinations must comply the following syntax example: 'rv32iac-ilp32-- rv32iaf-ilp32f--'");
+				}
+		}
+	}
+
+	private boolean doValidation(String combinationsString) {
+		boolean result = false;
+		
+		if(MultilibStringValidation.isTrue(combinationsString)) {
+			System.out.println("isTrue");
+			result = true;
+		}
+		return result;
+	}	
+	//-------------------------------------------------------------------------
 
 	/**
 	 * Creates the field editors. Field editors are abstractions of the common GUI
@@ -159,7 +189,7 @@ public class GlobalToolchainsPathsPreferencesPage extends FieldEditorPreferenceP
 		}
 		
 		//---Sanity check multilib combinations------------------------------
-		    
+		
 		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
 		FieldEditor combinationLabelField = new StringVariableFieldEditor("combinationsSet", "globalMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
 		combinationLabelField.setEnabled(true, getFieldEditorParent());

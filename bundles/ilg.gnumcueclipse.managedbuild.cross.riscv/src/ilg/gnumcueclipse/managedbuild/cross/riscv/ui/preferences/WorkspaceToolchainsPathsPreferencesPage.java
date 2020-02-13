@@ -21,6 +21,7 @@ import ilg.gnumcueclipse.managedbuild.cross.preferences.PersistentPreferences;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Activator;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.Option;
 import ilg.gnumcueclipse.managedbuild.cross.riscv.ui.Messages;
+import ilg.gnumcueclipse.managedbuild.cross.riscv.validation.CombinationCheck;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,9 +32,12 @@ import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -49,7 +53,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  */
 public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
-
+	
 	// ------------------------------------------------------------------------
 
 	public static final String ID = "ilg.gnumcueclipse.managedbuild.cross.riscv.preferencePage.workspaceToolchainsPaths";
@@ -81,6 +85,35 @@ public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferen
 			System.out.println("riscv.WorkspaceToolchainsPathsPreferencesPage.init()");
 		}
 	}
+	
+	// ------------------------------------------------------------------------
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event.getProperty().equals("field_editor_value")) {
+
+				if (doValidation(event.getNewValue().toString())==true) {
+					setValid(true);
+					setErrorMessage(null);
+//					super.performApply();
+//					super.propertyChange(event);
+				}
+				// if validation false
+				else {
+					setValid(false);
+					setErrorMessage("Invalid syntax -Supported multilibs combinations must comply the following syntax example: 'rv32iac-ilp32-- rv32iaf-ilp32f--'");
+				}
+		}
+	}
+
+	private boolean doValidation(String combinationsString) {
+		boolean result = false;
+		
+		if(MultilibStringValidation.isTrue(combinationsString)) {
+			System.out.println("isTrue");
+			result = true;
+		}
+		return result;
+	}	
+	//-------------------------------------------------------------------------
 
 	/**
 	 * Creates the field editors. Field editors are abstractions of the common GUI
@@ -145,13 +178,34 @@ public class WorkspaceToolchainsPathsPreferencesPage extends FieldEditorPreferen
 		
 		//---Sanity check multilib combinations------------------------------
 	    
+		// path (get the combination entered in Workspace scope - eclipse properties)
+//		combinationsString = Platform.getPreferencesService().getRootNode().node(InstanceScope.SCOPE)
+//				.node("ilg.gnumcueclipse.managedbuild.cross.riscv").get("combinationsSet", "not found");
+		
 		// StringVariableFieldEditor(String name, String variableName, String, variableDescription, String labelText,Composite parent)
-		FieldEditor combinationLabelField = new StringVariableFieldEditor("combinationsSet", "workspaceMultilibsCombinations", "description", "Supported combinations: ", getFieldEditorParent());
+		FieldEditor combinationLabelField = new StringVariableFieldEditor("combinationsSet", "workspaceMultilibsCombinations", Messages.ToolchainName_label, "Supported combinations: ", getFieldEditorParent());
 		combinationLabelField.setEnabled(true, getFieldEditorParent());
-//		labelField2.fillIntoGrid(getFieldEditorParent(), 1);
 		addField(combinationLabelField);
 		
-		//-------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------
+//		combinationLabelField.setPropertyChangeListener(new IPropertyChangeListener() {
+//			@Override
+//			public void propertyChange(PropertyChangeEvent event) {
+//				System.out.println("Got here-------------------------------------------------------------------");
+//				
+//				if(MultilibStringValidation.isTrue(combinationsString)) {
+//					System.out.println("isTrue");
+//				}
+//				else if (!MultilibStringValidation.isTrue(combinationsString)) {
+//					System.out.println("isNotTrue");
+//				}
+//				
+//			}
+//		});
+//----------------------------------------------------------------------------------------------		
+
+		
 	}
 
 	// ------------------------------------------------------------------------
